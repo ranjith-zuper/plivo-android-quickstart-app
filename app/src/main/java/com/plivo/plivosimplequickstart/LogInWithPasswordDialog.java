@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.plivo.quickstart.R;
+
 public class LogInWithPasswordDialog extends DialogFragment {
     EditText eUsername;
     EditText ePassword;

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.plivo.quickstart.R;
+
 public class LoginWithTokenOrUsernameDialog extends DialogFragment {
     private static final String TAG = "LoginWithTokenDialog";
 

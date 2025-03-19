@@ -4,9 +4,15 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 def username = properties.getProperty("plivo.username", "") ?: "\"\""
 def password = properties.getProperty("plivo.password", "") ?: "\"\""
+def typeHeader = properties.getProperty("plivo.typeHeader", "") ?: "\"\""
+def outgoingCallerIdHeader = properties.getProperty("plivo.outgoingCallerId", "") ?: "\"\""
+def agentUidHeader = properties.getProperty("plivo.agentUid", "") ?: "\"\""
 
 android {
     compileSdkVersion 30
+
+    namespace "com.plivo.plivosimplequickstart"
+
     defaultConfig {
         applicationId "com.plivo.plivosimplequickstart"
         minSdkVersion 21
@@ -16,6 +22,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "Username", username
         buildConfigField "String", "Password", password
+        buildConfigField "String", "HEADER_TYPE", typeHeader
+        buildConfigField "String", "HEADER_OUTGOING_CALLER_ID", outgoingCallerIdHeader
+        buildConfigField "String", "HEADER_AGENT_UID", agentUidHeader
     }
     buildTypes {
         release {
@@ -55,6 +64,10 @@ android {
             universalApk true
         }
     }
+
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {
@@ -62,7 +75,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.plivo.endpoint:endpoint:3.2.1-beta@aar'
+    implementation 'com.plivo.endpoint:endpoint:3.2.2-beta'
 
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'

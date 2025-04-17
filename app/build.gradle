@@ -9,14 +9,14 @@ def outgoingCallerIdHeader = properties.getProperty("plivo.outgoingCallerId", ""
 def agentUidHeader = properties.getProperty("plivo.agentUid", "") ?: "\"\""
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 35
 
     namespace "com.plivo.plivosimplequickstart"
 
     defaultConfig {
         applicationId "com.plivo.plivosimplequickstart"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -65,6 +65,14 @@ android {
         }
     }
 
+    packaging {
+        // Since this library is loaded by both mapbox and our opencv integration, we resolve the dependencies to the
+        // first occurrence
+        jniLibs {
+            pickFirst("lib/**/libc++_shared.so")
+        }
+    }
+
     buildFeatures {
         buildConfig true
     }
@@ -75,7 +83,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.plivo.endpoint:endpoint:3.2.2-beta'
+//    implementation 'com.plivo.endpoint:endpoint:3.2.2-beta'
 
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
